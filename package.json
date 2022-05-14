@@ -10,15 +10,38 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.2.1",
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-navigation/native": "^6.0.10",
+    "@react-navigation/native-stack": "^6.6.2",
+    "axios": "^0.27.1",
     "expo": "~44.0.0",
+    "expo-camera": "~12.1.2",
+    "expo-constants": "~13.0.1",
+    "expo-linear-gradient": "~11.0.3",
     "expo-status-bar": "~1.2.0",
+    "i18n-js": "^3.9.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-camera": "^4.2.1",
+    "react-native-elements": "^3.4.2",
+    "react-native-gesture-handler": "~2.1.0",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-loading-spinner-overlay": "^3.0.0",
+    "react-native-permissions": "^3.3.1",
+    "react-native-progress-bar-animated": "^1.0.6",
+    "react-native-progress-circle": "^2.1.0",
+    "react-native-qrcode-scanner": "^1.5.5",
+    "react-native-reanimated": "~2.3.1",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.10.1",
+    "react-native-step-indicator": "^1.0.3",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "react-error-overlay": "6.0.9"
   },
   "private": true
 }
