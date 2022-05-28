@@ -205,7 +205,7 @@ export default class Test extends Component<Props> {
             <Text
               style={[
                 styles.header_text_1,
-                { margin: 20, fontSize: this.state.H1 },
+                { margin: 20, fontSize: this.state.H2 },
               ]}
             >
               {i18n.t("read_play_win")}

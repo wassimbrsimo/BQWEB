@@ -24,20 +24,21 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Read" component={read_book} />
+        <Stack.Screen name="DetailBook" component={detail_book} />
+        <Stack.Screen
+          name="Book_list_container"
+          component={Book_list_container}
+        />
+        <Stack.Screen name="dashboard_page" component={dashboard_page} />
+
         <Stack.Screen name="start_page" component={start_page} />
         <Stack.Screen name="reader_info_form" component={reader_info_form} />
         <Stack.Screen name="login_qrcode" component={login_qrcode} />
         <Stack.Screen name="alert_after_quiz" component={alert_after_quiz} />
 
-        <Stack.Screen
-          name="Book_list_container"
-          component={Book_list_container}
-        />
-        <Stack.Screen name="DetailBook" component={detail_book} />
-        <Stack.Screen name="Read" component={read_book} />
         <Stack.Screen name="book_qrcode" component={book_qrcode} />
         <Stack.Screen name="after_quiz_1" component={after_quiz_1} />
-        <Stack.Screen name="dashboard_page" component={dashboard_page} />
         <Stack.Screen name="choose" component={chooseScreen} />
         <Stack.Screen name="scan_book" component={Test} />
         {/* <Stack.Screen name="play_quiz" component={play_quiz} /> */}

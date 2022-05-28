@@ -2,16 +2,16 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-// import {WebView} from 'react-native-webview';
+ import {WebView} from 'react-native-webview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function read_book(props) {
   return (
     <View style={{flex: 1}}>
-      {/* <WebView
+      <WebView
         source={{uri: props.route.params.book.Link}}
         style={{flex: 1, paddingBottom: 80}}
-      /> */}
+      />
       <TouchableOpacity
         style={[
           styles.buttonTouchable,
