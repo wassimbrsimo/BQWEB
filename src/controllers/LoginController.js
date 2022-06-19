@@ -8,8 +8,8 @@ import Message from "../models/Message";
 
 export const login = async (username, password) => {
   var formData = new FormData();
-  formData.append("username", "quizzito1543b0");
-  formData.append("password", "quizzito2f79e");
+  formData.append("username", username);
+  formData.append("password", password);
   let url =
     QuizzitoConstant.API_URL +
     QuizzitoConstant.PRE_END_POINT +
