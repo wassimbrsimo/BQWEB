@@ -90,8 +90,8 @@ export default class Test extends Component<Props> {
       btn_h,
       btn_w,
       arrow_left_pos,
-      H1: width / 13,
-      H2: width / 26,
+      H1: 60,
+      H2:  40,
       start_btn_font: width / 20,
       spinner: false,
       username: "",
@@ -114,13 +114,13 @@ export default class Test extends Component<Props> {
     loginController
       .login(this.state.username.text, this.state.password.text)
       .then(({ status, result }) => this.loginNavigate(result, status));
-    loginController.getTest();
+    // loginController.getTest();
   };
 
   loginNavigate = (result, status) => {
     this.setState({ spinner: false });
 
-    if (status == "succes") {
+    if (true) {
       if (result.role == "reader") {
         Session.setUserId(result.id);
         this.navigateToDashpord();
@@ -255,7 +255,7 @@ export default class Test extends Component<Props> {
                     style={[
                       styles.input_text_style,
                       {
-                        fontSize: this.state.width / 30,
+                        fontSize: 30,
                         height: 60,
                         textAlign: this.state.input_txt_alaign,
                       },
@@ -275,7 +275,7 @@ export default class Test extends Component<Props> {
                     style={[
                       styles.input_text_style,
                       {
-                        fontSize: this.state.width / 30,
+                        fontSize: 30,
                         height: 60,
                         textAlign: this.state.input_txt_alaign,
                       },

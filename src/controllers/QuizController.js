@@ -63,7 +63,7 @@ export const nextQuestion = async(answserID, quizId) => {
     formData.append('ans', answserID);
     formData.append('quiz_id', quizId);
   
-    let url = QuizzitoConstant.API_URL + QuizzitoConstant.PRE_END_POINT + QuizzitoConstant.IS_MAIN_NEW + "/quizzito/playquiz/next_question2/";
+    let url = QuizzitoConstant.API_URL + QuizzitoConstant.PRE_END_POINT + QuizzitoConstant.IS_MAIN_NEW + "/quizzito/playquiz/next_question2";
 
     let header =await Request.getHeader(HTTPMethods.POST, formData);
    

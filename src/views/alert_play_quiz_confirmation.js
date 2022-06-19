@@ -67,7 +67,7 @@ export default class Test extends Component<Props> {
             style={[
               styles.alert_title,
               {
-                fontSize: this.state.width / 20,
+                fontSize: 35,
               },
             ]}>
             {i18n.t('confirmation')}
@@ -75,8 +75,8 @@ export default class Test extends Component<Props> {
           <Image
             source={require('../assets/images/confirm_play.png')}
             style={{
-              width: this.state.width / 2.5,
-              height: this.state.width / 3,
+              width:350,
+              height: 350,
               resizeMode: 'contain',
             }}
           />
@@ -84,7 +84,7 @@ export default class Test extends Component<Props> {
             style={[
               styles.alert_msg_text,
               {
-                fontSize: this.state.width / 25,
+                fontSize:35,
               },
             ]}>
             {i18n.t('msg_confirm_play_quiz')}
@@ -95,7 +95,7 @@ export default class Test extends Component<Props> {
               titleStyle={[
                 styles.no_btn_title,
                 {
-                  fontSize: this.state.width / 22,
+                  fontSize: 35,
                 },
               ]}
               type="clear"
@@ -107,13 +107,13 @@ export default class Test extends Component<Props> {
             <Button
               title={i18n.t('yes_btn')}
               titleStyle={{
-                fontSize: this.state.width / 22,
+                fontSize:35,
               }}
               containerStyle={[
                 styles.container_style_btn,
                 {
-                  width: this.state.width / 6,
-                  height: this.state.width / 10,
+                  width: 150,
+                  height: 50,
                 },
               ]}
               raised={true}
@@ -123,8 +123,8 @@ export default class Test extends Component<Props> {
               buttonStyle={[
                 styles.yes_btn,
                 {
-                  width: this.state.width / 6,
-                  height: this.state.width / 10,
+                  width: 150,
+                  height: 50,
                 },
               ]}
             />

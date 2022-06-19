@@ -78,7 +78,7 @@ export default class Test extends Component<Props> {
   navigateToBooks() {
     const { navigate } = this.props.navigation;
     //navigate('choose', {userResult: this.state.userResult});
-    navigate("book_qrcode", { userResult: this.state.userResult });
+    navigate("Book_list_container", { userResult: this.state.userResult });
   }
   navigateToEditInfo() {
     const { navigate } = this.props.navigation;
@@ -119,7 +119,7 @@ export default class Test extends Component<Props> {
 
   initResultProfile(userProfile) {
     //this.navigateToEditInfo();
-    if (userProfile.f_name.includes("quizzito")) {
+    if (userProfile?.f_name?.includes("quizzito")) {
       this.navigateToEditInfo();
     }
 
@@ -177,9 +177,7 @@ export default class Test extends Component<Props> {
               end={{ x: 1, y: 0 }}
             >
               <Text style={[styles.username_text, { fontSize: 30 }]}>
-                {this.state.userProfile.f_name +
-                  " " +
-                  this.state.userProfile.l_name}
+                {this.state.userProfile.f_name}
               </Text>
             </LinearGradient>
           </View>

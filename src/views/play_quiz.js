@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
 import {
   FlatList,
@@ -17,34 +17,34 @@ import {
   Image,
   ImageBackground,
   Dimensions,
-} from 'react-native';
-import i18n from 'i18n-js';
+} from "react-native";
+import i18n from "i18n-js";
 
-import {BackHandler} from 'react-native';
+import { BackHandler } from "react-native";
 
-import * as quizController from '../controllers/QuizController';
+import * as quizController from "../controllers/QuizController";
 
-import * as loginController from '../controllers/LoginController';
-import * as Session from '../prefs/Session';
+import * as loginController from "../controllers/LoginController";
+import * as Session from "../prefs/Session";
 
-import {Button, ButtonGroup, ThemeConsumer} from 'react-native-elements';
+import { Button, ButtonGroup, ThemeConsumer } from "react-native-elements";
 
-import { LinearGradient } from 'expo-linear-gradient';
-import colors from '../res/value/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import lang from '../res/value/res_string/string';
-import ProgressBarAnimated from 'react-native-progress-bar-animated';
-import Quiz from '../models/Quiz';
-import {Overlay} from 'react-native-elements';
+import { LinearGradient } from "expo-linear-gradient";
+import colors from "../res/value/colors";
+import Icon from "react-native-vector-icons/FontAwesome";
+import lang from "../res/value/res_string/string";
+import ProgressBarAnimated from "react-native-progress-bar-animated";
+import Quiz from "../models/Quiz";
+import { Overlay } from "react-native-elements";
 //import { NativeModules } from 'react-native';
 //import console = require('console');
 //import Quiz from '../models/Quiz';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    "Double tap R on your keyboard to reload,\n" +
+    "Shake or press menu button for dev menu",
 });
 
 type Props = {};
@@ -52,29 +52,43 @@ export default class Test extends Component<Props> {
   constructor(props) {
     super(props);
     // lang checks
-    var locale = 'fr_FR';
+    var locale = "fr_FR";
     /* if( Platform.OS === 'ios'){
    locale = NativeModules.SettingsManager.settings.AppleLocale // "fr_FR"
    }else{
     locale = NativeModules.I18nManager.localeIdentifier // "fr_FR"
    }*/
-    var array = locale.split('_');
+    var array = locale.split("_");
     var lang = array[0];
-    if (lang === 'ar') {
+    let is_ar = false;
+    let emoji_w = 53;
+    let emoji_h = 51;
+    let alert_msg_fs = 17;
+    let alert_title_fs = 20;
+    let alert_img_s = 230;
+    let alert_btn_txt_s = 18;
+    let alert_w = 400;
+    let alert_h = 600;
+    let alert_yes_w = 130;
+    let alert_yes_h = 45;
+    let trefl_left_side = null;
+    let trefl_right_side = null;
+    if (lang === "ar") {
       (is_ar = true),
-        (trefl_left_side = require('../assets/images/trefl_left.png'));
-      trefl_right_side = require('../assets/images/trefl_right.png');
+        (trefl_left_side = require("../assets/images/trefl_left.png"));
+      trefl_right_side = require("../assets/images/trefl_right.png");
     } else {
       (is_ar = false),
-        (trefl_left_side = require('../assets/images/trefl_right.png'));
-      trefl_right_side = require('../assets/images/trefl_left.png');
+        (trefl_left_side = require("../assets/images/trefl_right.png"));
+      trefl_right_side = require("../assets/images/trefl_left.png");
     }
+
     (this.quiz_id = this.props.route.params.quiz_id),
-      (this.battel_id = 'V9zqM8KYZWQYBZ1a');
-    this.play_mode = 'battle_selected';
+      (this.battel_id = "V9zqM8KYZWQYBZ1a");
+    this.play_mode = "battle_selected";
 
     let quiznew = new Quiz();
-    const {width, height} = Dimensions.get('window');
+    const { width, height } = Dimensions.get("window");
     if (width >= 600) {
       (emoji_w = 53),
         (emoji_h = 51),
@@ -121,36 +135,36 @@ export default class Test extends Component<Props> {
       progressWithOnComplete: 0,
       progressCustomized: 0,
       quiz: quiznew,
-      answers: ['Answer 1', 'Answer 2', 'Answer 3'],
+      answers: ["Answer 1", "Answer 2", "Answer 3"],
       isCorrectAnswer: false,
       selected_answer_style: styles.selected_answer,
-      questionCounterGradientStartColor: '#E9E9E9',
-      questionCounterGradientEndColor: '#E9E9E9',
+      questionCounterGradientStartColor: "#E9E9E9",
+      questionCounterGradientEndColor: "#E9E9E9",
 
       questionNumber: 0,
       listQuestionStatus: [
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
-        {img: require('../assets/images/emptyemoji.png')},
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
+        { img: require("../assets/images/emptyemoji.png") },
       ],
       listQuestionIndicator: [
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
-        {img: require('../assets/images/mothaleth_faregh.png')},
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
+        { img: require("../assets/images/mothaleth_faregh.png") },
       ],
     };
 
@@ -164,31 +178,31 @@ export default class Test extends Component<Props> {
   };
   updateIndex(selectedIndex) {
     if (this.state.selectedIndex == -1 || this.state.showBtnConfirm) {
-      this.setState({selectedIndex});
+      this.setState({ selectedIndex });
       this.state.showBtnConfirm = true;
     }
   }
 
   navigateToAbout() {
-    const {navigate} = this.props.navigation;
-    navigate('Home');
+    const { navigate } = this.props.navigation;
+    navigate("Home");
   }
   navigateToAlertAffterQuiz(quiz) {
     this.clockCall = null;
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     this.backHandler.remove();
-    navigate('alert_after_quiz', {quiz: quiz});
+    navigate("alert_after_quiz", { quiz: quiz });
   }
 
   leaveGame() {
     this.clockCall = null;
     //this.validateAnswerTimerfalse();
-    this.setState({leavel: false});
+    this.setState({ leavel: false });
     this.logout();
   }
   navigateStart() {
-    const {navigate} = this.props.navigation;
-    navigate('start_page');
+    const { navigate } = this.props.navigation;
+    navigate("start_page");
   }
   logout() {
     Session.logout();
@@ -209,7 +223,7 @@ export default class Test extends Component<Props> {
       //this false reponce
       this.validateAnswerTimerfalse();
     }
-    this.setState(prevstate => ({
+    this.setState((prevstate) => ({
       timer: prevstate.timer - 1,
       progress: prevstate.progress - 1.66,
     }));
@@ -218,12 +232,12 @@ export default class Test extends Component<Props> {
   componentWillMount() {
     quizController
       .initQuiz(this.play_mode, this.quiz_id, this.battel_id)
-      .then(({status, result}) => this.initQuiz(result));
+      .then(({ status, result }) => this.initQuiz(result));
   }
   componentDidMount() {
     this.startTimerPlayQuiz();
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      this.setState({leavel: true});
+    this.backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
+      this.setState({ leavel: true });
     });
   }
   componentWillUnmount() {
@@ -232,15 +246,15 @@ export default class Test extends Component<Props> {
 
   resetViewForTheNextQuestion() {
     this.setGradientColor(false);
-    this.setState({showBtnConfirm: false});
+    this.setState({ showBtnConfirm: false });
 
-    this.setState({selected_answer_style: styles.selected_answer});
-    this.setState({isCorrectAnswer: false});
+    this.setState({ selected_answer_style: styles.selected_answer });
+    this.setState({ isCorrectAnswer: false });
   }
 
-  showQuestion(quiz) {
+  showQuestion(quiz, message) {
     //alert(JSON.stringify(quiz));
-
+    console.log(this.state.questionNumber, quiz, message);
     if (this.state.questionNumber <= quiz.nbr_questions_per_quiz) {
       this.resetViewForTheNextQuestion();
       var answers = [
@@ -258,16 +272,17 @@ export default class Test extends Component<Props> {
       });
       //SharedPreferences.setItem("session_ci", quiz.session_id);
       //to do hamid show button confirm
-      this.setState({showBtnConfirm: false});
+      this.setState({ showBtnConfirm: false });
     } else {
       this.navigateToAlertAffterQuiz(quiz);
     }
   }
   initQuiz(quiz) {
-    if (quiz.status != 'fail') {
+    if (quiz.status != "fail") {
+      console.log(quiz);
       this.setState({
         quiz: quiz,
-        questionNumber: quiz.answers_status_table.length + 1,
+        questionNumber: quiz?.answers_status_table?.length + 1,
         timer: quiz.nbr_sec_per_question,
       });
 
@@ -285,7 +300,7 @@ export default class Test extends Component<Props> {
         quiz.answers[1].text,
         quiz.answers[2].text,
       ];
-      this.setState({answers: answers});
+      this.setState({ answers: answers });
 
       Session.setSessionId(quiz.session_id);
     } else {
@@ -294,9 +309,9 @@ export default class Test extends Component<Props> {
   }
   validateAnswerTimerfalse() {
     var answerId = 0;
-    this.setState({showBtnConfirm: false});
-    this.setState({isCorrectAnswer: false});
-    this.setState({selected_answer_style: styles.selected_wrong_answer});
+    this.setState({ showBtnConfirm: false });
+    this.setState({ isCorrectAnswer: false });
+    this.setState({ selected_answer_style: styles.selected_wrong_answer });
     this.showEmoji(this.state.questionNumber - 1, false);
     this.setGradientColor(false);
 
@@ -309,19 +324,19 @@ export default class Test extends Component<Props> {
     //to do  hamid  hide button confirm
     if (this.state.selectedIndex !== -1) {
       //user selected an answer
-      this.setState({showBtnConfirm: false});
+      this.setState({ showBtnConfirm: false });
       var answerId = this.state.quiz.answers[this.state.selectedIndex].order_a; //get selected answer ID
       if (
-        this.state.quiz.answers[this.state.selectedIndex].IsCorrect == 'true'
+        this.state.quiz.answers[this.state.selectedIndex].IsCorrect == "true"
       ) {
         //check if the selected answer is correct
-        this.setState({isCorrectAnswer: true});
-        this.setState({selected_answer_style: styles.selected_right_answer});
+        this.setState({ isCorrectAnswer: true });
+        this.setState({ selected_answer_style: styles.selected_right_answer });
         this.showEmoji(this.state.questionNumber - 1, true);
         this.setGradientColor(true);
       } else {
-        this.setState({isCorrectAnswer: false});
-        this.setState({selected_answer_style: styles.selected_wrong_answer});
+        this.setState({ isCorrectAnswer: false });
+        this.setState({ selected_answer_style: styles.selected_wrong_answer });
         this.showEmoji(this.state.questionNumber - 1, false);
         this.setGradientColor(false);
       }
@@ -333,50 +348,50 @@ export default class Test extends Component<Props> {
   }
 
   nextQuestion(answerId) {
-    console.log('NEXT QUESTION ID ', answerId);
+    console.log("NEXT QUESTION ID ", answerId);
     //send the answerID to quizcontroller and run showNextQuestion
     quizController
       .nextQuestion(answerId, this.quiz_id)
-      .then(({messager, result}) => this.showQuestion(result));
+      .then(({ messager, result }) => this.showQuestion(result, messager));
   }
 
   showEmoji(questionIndex, right_answer) {
-    var happy_emoji = '../assets/images/happyemoji.png';
-    var sad_emoji = '../assets/images/sademoji.png';
-    var mothaleth = '../assets/images/mothaleth.png';
-    var mothaleth_faregh = '../assets/images/mothaleth_faregh.png';
-    if (right_answer) {
-      this.state.listQuestionStatus[questionIndex].img = require(happy_emoji);
-      this.state.listQuestionIndicator[
-        questionIndex
-      ].img = require(mothaleth_faregh);
-      if (this.state.quiz.nbr_questions_per_quiz > questionIndex + 1)
-        this.state.listQuestionIndicator[
-          questionIndex + 1
-        ].img = require(mothaleth);
-    } else {
-      this.state.listQuestionStatus[questionIndex].img = require(sad_emoji);
-      this.state.listQuestionIndicator[
-        questionIndex
-      ].img = require(mothaleth_faregh);
-      if (this.state.quiz.nbr_questions_per_quiz > questionIndex + 1)
-        this.state.listQuestionIndicator[
-          questionIndex + 1
-        ].img = require(mothaleth);
-    }
+    // var happy_emoji = "../assets/images/happyemoji.png";
+    // var sad_emoji = "../assets/images/sademoji.png";
+    // var mothaleth = "../assets/images/mothaleth.png";
+    // var mothaleth_faregh = "../assets/images/mothaleth_faregh.png";
+    // if (right_answer) {
+    //   this.state.listQuestionStatus[questionIndex].img = require(happy_emoji);
+    //   this.state.listQuestionIndicator[
+    //     questionIndex
+    //   ].img = require(mothaleth_faregh);
+    //   if (this.state.quiz.nbr_questions_per_quiz > questionIndex + 1)
+    //     this.state.listQuestionIndicator[
+    //       questionIndex + 1
+    //     ].img = require(mothaleth);
+    // } else {
+    //   this.state.listQuestionStatus[questionIndex].img = require(sad_emoji);
+    //   this.state.listQuestionIndicator[
+    //     questionIndex
+    //   ].img = require(mothaleth_faregh);
+    //   if (this.state.quiz.nbr_questions_per_quiz > questionIndex + 1)
+    //     this.state.listQuestionIndicator[
+    //       questionIndex + 1
+    //     ].img = require(mothaleth);
+    // }
   }
 
   //change the color of the container of the question counter (set it to green if correct answer)
   setGradientColor(right_answer) {
     if (right_answer) {
       this.setState({
-        questionCounterGradientStartColor: '#27C236',
-        questionCounterGradientEndColor: '#26C135',
+        questionCounterGradientStartColor: "#27C236",
+        questionCounterGradientEndColor: "#26C135",
       });
     } else {
       this.setState({
-        questionCounterGradientEndColor: '#E9E9E9',
-        questionCounterGradientStartColor: '#E9E9E9',
+        questionCounterGradientEndColor: "#E9E9E9",
+        questionCounterGradientStartColor: "#E9E9E9",
       });
     }
   }
@@ -387,13 +402,13 @@ export default class Test extends Component<Props> {
     for (var i = 0; i < this.state.quiz.nbr_questions_per_quiz; i++) {
       imageStatus.push(
         <Image
-          key={'imageStatus' + i}
+          key={"imageStatus" + i}
           source={this.state.listQuestionStatus[i].img}
           style={{
             width: this.state.emoji_w,
             height: this.state.emoji_h,
           }}
-        />,
+        />
       );
     }
     return imageStatus;
@@ -404,14 +419,15 @@ export default class Test extends Component<Props> {
     for (var i = 0; i < this.state.quiz.nbr_questions_per_quiz; i++) {
       iconStatus.push(
         <View
-          key={'iconStatus' + i}
+          key={"iconStatus" + i}
           style={{
             width: this.state.emoji_w,
             height: this.state.emoji_h,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Image
             style={{
               width: this.state.emoji_w / 4,
@@ -419,7 +435,7 @@ export default class Test extends Component<Props> {
             }}
             source={this.state.listQuestionIndicator[i].img}
           />
-        </View>,
+        </View>
       );
     }
     return iconStatus;
@@ -429,18 +445,16 @@ export default class Test extends Component<Props> {
       return (
         <Button
           title="CONFIRM"
-          titleStyle={[
-            styles.start_btn_title,
-            {fontSize: this.state.width / 22},
-          ]}
+          titleStyle={[styles.start_btn_title, { fontSize: 35 }]}
           containerStyle={{
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
             borderRadius: 50,
-            width: this.state.width / 2,
-            height: this.state.width / 9,
-            marginBottom: this.state.width / 10,
-            marginTop: this.state.width / 12,
+            width: 350,
+            height: 100,
+
+            marginBottom: this.state.width / 20,
+            marginTop: this.state.width / 22,
           }}
           raised={true}
           onPress={() => {
@@ -462,42 +476,48 @@ export default class Test extends Component<Props> {
   }
 
   render() {
-    const {selectedIndex} = this.state;
+    const { selectedIndex } = this.state;
     const barWidth = 300; //Dimensions.get('screen').width - 30;
     const progressCustomStyles = {
-      backgroundColor: 'red',
+      backgroundColor: "red",
       borderRadius: 0,
-      borderColor: 'orange',
+      borderColor: "orange",
     };
     return (
       <View style={styles.container}>
         <Overlay
           overlayStyle={styles.alert_container}
-          height={'55%'}
-          width={'65%'}
-          isVisible={this.state.leavel}>
+          height={"55%"}
+          width={"65%"}
+          isVisible={this.state.leavel}
+        >
           <Text
-            style={[styles.alert_title, {fontSize: this.state.alert_title_fs}]}>
-            {i18n.t('msg_leave_game_title')}
+            style={[
+              styles.alert_title,
+              { fontSize: this.state.alert_title_fs },
+            ]}
+          >
+            {i18n.t("msg_leave_game_title")}
           </Text>
           <Image
-            source={require('../assets/images/triangle_alert.png')}
+            source={require("../assets/images/triangle_alert.png")}
             style={{
               width: this.state.alert_img_s,
               height: this.state.alert_img_s,
-              resizeMode: 'contain',
+              resizeMode: "contain",
             }}
           />
           <Text
             style={[
               styles.alert_msg_text,
-              {fontSize: this.state.alert_msg_fs},
-            ]}>
-            {i18n.t('msg_leave_game')}
+              { fontSize: this.state.alert_msg_fs },
+            ]}
+          >
+            {i18n.t("msg_leave_game")}
           </Text>
           <View style={styles.button_container}>
             <Button
-              title={i18n.t('leave_btn')}
+              title={i18n.t("leave_btn")}
               titleStyle={[
                 styles.no_btn_title,
                 {
@@ -510,7 +530,7 @@ export default class Test extends Component<Props> {
               }}
             />
             <Button
-              title={i18n.t('play_btn')}
+              title={i18n.t("play_btn")}
               titleStyle={{
                 fontSize: this.state.alert_btn_txt_s,
                 letterSpacing: 3,
@@ -532,12 +552,12 @@ export default class Test extends Component<Props> {
               ]}
               ViewComponent={LinearGradient}
               linearGradientProps={{
-                colors: ['#F99C3F', '#FE31C4'],
-                start: {x: 0, y: 0},
-                end: {x: 1, y: 0},
+                colors: ["#F99C3F", "#FE31C4"],
+                start: { x: 0, y: 0 },
+                end: { x: 1, y: 0 },
               }}
               onPress={() => {
-                this.setState({leavel: false});
+                this.setState({ leavel: false });
               }}
             />
           </View>
@@ -545,41 +565,45 @@ export default class Test extends Component<Props> {
         {/* top view */}
         <View style={styles.radius_view}>
           <ImageBackground
-            source={require('../assets/images/bg_5.png')}
-            style={styles.img_bg_container}>
+            source={require("../assets/images/bg_5.png")}
+            style={styles.img_bg_container}
+          >
             {/* emoji layout TODO @Hishem  control based on the answer and the current question position */}
             <View
               style={{
-                width: '90%',
-                flexDirection: 'row',
+                width: "90%",
+                flexDirection: "row",
                 flex: 0.1,
-                alignItems: 'center',
-                justifyContent: 'space-between',
+                alignItems: "center",
+                justifyContent: "space-between",
                 marginBottom: 7,
-              }}>
-              {this.generateImageStauts()}
+              }}
+            >
+              {/* {this.generateImageStauts()} */}
             </View>
             {/* layout of almothaleth TODO @Hishem  move the mothaleth png with the current question position*/}
             <View
               style={{
-                width: '90%',
-                flexDirection: 'row',
+                width: "90%",
+                flexDirection: "row",
                 flex: 0.1,
-                alignItems: 'center',
-                justifyContent: 'space-between',
+                alignItems: "center",
+                justifyContent: "space-between",
                 marginBottom: -10,
-              }}>
+              }}
+            >
               {this.generateCurrentQuestionIndicator()}
             </View>
             <View
               style={{
-                width: '90%',
+                width: "90%",
                 height: 7,
                 borderRadius: 5,
                 height: 5,
                 backgroundColor: colors.orange_book_level,
                 marginTop: 7,
-              }}></View>
+              }}
+            ></View>
 
             {/* question counter container  */}
             <View style={styles.question_counter_container}>
@@ -587,7 +611,7 @@ export default class Test extends Component<Props> {
               {this.state.isCorrectAnswer ? (
                 <Image
                   source={this.state.trefl_right_side}
-                  style={{width: 38, height: 53, marginEnd: 30}}
+                  style={{ width: 38, height: 53, marginEnd: 30 }}
                 />
               ) : null}
 
@@ -599,36 +623,39 @@ export default class Test extends Component<Props> {
                 //colors={['#F99C3F', '#FE31C4']}
 
                 style={styles.question_counter}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}>
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
                 <View
                   style={{
                     width: 98,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}>
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
                   <Text style={styles.question_number}>
-                    {' '}
-                    {this.state.questionNumber}{' '}
+                    {" "}
+                    {this.state.questionNumber}{" "}
                   </Text>
                   <Text style={styles.question_number}> / </Text>
                   <Text style={styles.question_number}>
-                    {' '}
-                    {this.state.quiz.nbr_questions_per_quiz}{' '}
+                    {" "}
+                    {this.state.quiz.nbr_questions_per_quiz}{" "}
                   </Text>
                 </View>
                 <View
                   style={{
-                    width: '85%',
+                    width: "85%",
                     height: 8,
                     borderRadius: 8,
-                    backgroundColor: 'white',
-                    position: 'relative',
+                    backgroundColor: "white",
+                    position: "relative",
                     top: 18,
-                  }}></View>
+                  }}
+                ></View>
                 <Image
-                  source={require('../assets/images/cha7ta.png')}
-                  style={{width: 66, height: 66, marginTop: -10}}
+                  source={require("../assets/images/cha7ta.png")}
+                  style={{ width: 66, height: 66, marginTop: -10 }}
                 />
               </LinearGradient>
               {/* trefle to show if the answer is right in the left side  */}
@@ -636,7 +663,7 @@ export default class Test extends Component<Props> {
               {this.state.isCorrectAnswer ? (
                 <Image
                   source={this.state.trefl_left_side}
-                  style={{width: 38, height: 53, marginStart: 30}}
+                  style={{ width: 38, height: 53, marginStart: 30 }}
                 />
               ) : null}
             </View>
@@ -644,23 +671,25 @@ export default class Test extends Component<Props> {
 
             <Text
               style={{
-                width: '70%',
-                textAlign: 'center',
+                width: "70%",
+                textAlign: "center",
                 color: colors.grey_button_text,
                 fontSize: this.state.width / 27,
                 flex: 0.5,
                 marginTop: this.state.width / 10,
-              }}>
+              }}
+            >
               {this.state.quiz.question}
             </Text>
             {/* answers button group */}
             <View
               style={{
-                width: '90%',
+                width: "90%",
                 flex: 1.5,
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}>
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <ButtonGroup
                 onPress={this.updateIndex}
                 selectedIndex={selectedIndex}
@@ -678,7 +707,7 @@ export default class Test extends Component<Props> {
                 selectedTextStyle={styles.selected_text}
                 textStyle={{
                   fontSize: this.state.alert_msg_fs,
-                  textAlign: 'center',
+                  textAlign: "center",
                   paddingEnd: 7,
                   paddingStart: 7,
                   color: colors.grey_button_text,
@@ -708,10 +737,11 @@ export default class Test extends Component<Props> {
                 width: 60,
                 height: 60,
                 borderRadius: 60 / 2,
-                backgroundColor: 'white',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
+                backgroundColor: "white",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <Button
                 buttonStyle={{
                   width: 37,
@@ -719,7 +749,7 @@ export default class Test extends Component<Props> {
                   borderRadius: 37 / 2,
                   backgroundColor: colors.orange_book_level,
                 }}
-                onPress={this.increase.bind(this, 'progress', 20)}
+                onPress={this.increase.bind(this, "progress", 20)}
               />
             </View>
           </View>
@@ -731,68 +761,68 @@ export default class Test extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    width: '100%',
+    flexDirection: "column",
+    width: "100%",
     flex: 1,
 
     //justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: colors.blue_1,
   },
   img_bg_container: {
-    flexDirection: 'column',
+    flexDirection: "column",
     flex: 1,
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'space-between',
-    resizeMode: 'contain',
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    justifyContent: "space-between",
+    resizeMode: "contain",
     borderRadius: 20,
     paddingTop: 20,
   },
   bottom_container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 0.1,
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    resizeMode: 'center',
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    resizeMode: "center",
     backgroundColor: colors.blue_1,
   },
   radius_view: {
-    flexDirection: 'column',
+    flexDirection: "column",
     flex: 1,
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   question_counter: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
     width: 182,
     height: 101,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     paddingBottom: 10,
     paddingTop: 30,
     borderRadius: 15,
   },
   question_number: {
     fontSize: 27,
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   question_counter_container: {
     flex: 0.7,
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '80%',
+    flexDirection: "row",
+    alignItems: "center",
+    width: "80%",
     marginTop: 33,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   answer_text: {
     fontSize: 17,
@@ -800,12 +830,12 @@ const styles = StyleSheet.create({
   },
   btn_grp_container: {
     flex: 1,
-    flexDirection: 'column',
-    width: '100%',
-    justifyContent: 'space-around',
-    backgroundColor: 'transparent',
+    flexDirection: "column",
+    width: "100%",
+    justifyContent: "space-around",
+    backgroundColor: "transparent",
     borderWidth: 0,
-    borderColor: 'transparent',
+    borderColor: "transparent",
   },
   btn_answer: {
     backgroundColor: colors.light_grey,
@@ -821,11 +851,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.confirm_btn_green,
   },
   selected_text: {
-    color: 'white',
+    color: "white",
   },
 
   start_btn: {
-    justifyContent: 'center',
+    justifyContent: "center",
     //alignItems: 'center',
 
     backgroundColor: colors.confirm_btn_green,
@@ -840,39 +870,39 @@ const styles = StyleSheet.create({
   },
   alert_container: {
     padding: 30,
-    flexDirection: 'column',
+    flexDirection: "column",
 
     borderRadius: 25,
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: "space-between",
+    alignItems: "center",
 
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   alert_title: {
     color: colors.grey_button_text,
     //fontSize: 24,
-    textAlign: 'center',
+    textAlign: "center",
     letterSpacing: 2,
     marginTop: 20,
   },
   read_play_img: {
     width: 250,
     height: 200,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
   alert_msg_text: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     //fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     color: colors.grey_button_text,
-    width: '100%',
+    width: "100%",
     marginBottom: 20,
   },
   button_container: {
-    height: '15%',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    height: "15%",
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-start",
 
     paddingTop: 20,
     borderTopWidth: 0.8,

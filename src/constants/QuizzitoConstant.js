@@ -3,7 +3,7 @@ export  const API_URL_UPLOAD = TEST_MODE ? "http://test.quizzito.com/parents/upl
             "http://www.quizzito.com/quizzito/parents/uploads/img/";
 export  const TEST_MODE   = false;
 
-export const  API_URL  =TEST_MODE ?  "http://192.168.1.2" : "https://www.quizzito.com";
+export const  API_URL  =TEST_MODE ?  "http://localhost" : "https://www.quizzito.com";
 
 export const PRE_END_POINT  = TEST_MODE ? "/quizzito_showcase" : "";;
 

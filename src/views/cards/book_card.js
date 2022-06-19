@@ -14,7 +14,8 @@ export default class BookCard extends Component<Props> {
   constructor(props: Props) {
     super(props);
     const { width, height } = Dimensions.get("window");
-
+    let card_h = 0;
+    let level_margin_top = 0;
     if (width > 600) {
       (card_h = 188), //width/3.5,
         (level_margin_top = 30);
@@ -69,9 +70,7 @@ export default class BookCard extends Component<Props> {
               paddingTop: 7,
             }}
           >
-            <Text
-              style={[styles.bookTitle, { fontSize: this.state.width / 24 }]}
-            >
+            <Text style={[styles.bookTitle, { fontSize: 30 }]}>
               {this.state.book.title}
             </Text>
           </View>
@@ -84,12 +83,7 @@ export default class BookCard extends Component<Props> {
               paddingTop: 7,
             }}
           >
-            <Text
-              style={[
-                styles.text,
-                { fontSize: this.state.width / 26, color: "gray" },
-              ]}
-            >
+            <Text style={[styles.text, { fontSize: 20, color: "gray" }]}>
               {this.state.book.description}
             </Text>
           </View>
@@ -116,9 +110,8 @@ export default class BookCard extends Component<Props> {
                 style={[
                   styles.level_box,
                   {
-                    width: this.state.width / 5,
-                    fontSize: this.state.width / 27,
-                    height: this.state.width / 17,
+                    width: 150,
+                    fontSize: 20,
                     //widht:this.state.width/7,
                     //paddingTop:3,
                     //paddingBottom:3,
@@ -143,7 +136,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     borderRadius: 20,
-    marginBottom: 20,
+    marginBottom: 30,
     backgroundColor: "white",
     borderWidth: 0.8,
     //paddingTop:8,

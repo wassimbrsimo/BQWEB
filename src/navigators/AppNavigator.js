@@ -10,7 +10,7 @@ import login_welcome_page from "../views/first_view_test";
 import after_quiz_1 from "../views/after_quiz_1";
 import alert_after_quiz from "../views/alert_after_quiz";
 import alert_leave_game from "../views/alert_leave_game";
-// import play_quiz from "../views/play_quiz";
+import play_quiz from "../views/play_quiz";
 import reader_info_form from "../views/reader_info_form";
 import login_qrcode from "../views/loginQrcode";
 import book_qrcode from "../views/book_qrcode";
@@ -24,6 +24,7 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="start_page" component={start_page} />
         <Stack.Screen name="Read" component={read_book} />
         <Stack.Screen name="DetailBook" component={detail_book} />
         <Stack.Screen
@@ -32,7 +33,6 @@ function AppNavigator() {
         />
         <Stack.Screen name="dashboard_page" component={dashboard_page} />
 
-        <Stack.Screen name="start_page" component={start_page} />
         <Stack.Screen name="reader_info_form" component={reader_info_form} />
         <Stack.Screen name="login_qrcode" component={login_qrcode} />
         <Stack.Screen name="alert_after_quiz" component={alert_after_quiz} />
@@ -41,7 +41,7 @@ function AppNavigator() {
         <Stack.Screen name="after_quiz_1" component={after_quiz_1} />
         <Stack.Screen name="choose" component={chooseScreen} />
         <Stack.Screen name="scan_book" component={Test} />
-        {/* <Stack.Screen name="play_quiz" component={play_quiz} /> */}
+        <Stack.Screen name="play_quiz" component={play_quiz} />
         <Stack.Screen
           name="alert_play_quiz_confirmation"
           component={alert_play_quiz_confirmation}
