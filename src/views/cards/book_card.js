@@ -45,7 +45,7 @@ export default class BookCard extends Component<Props> {
   render() {
     return (
       <TouchableOpacity
-        style={[styles.listViewItemContainer, { height: this.state.card_h }]}
+        style={[styles.listViewItemContainer]}
         onPress={() => this.navigateToDetailBook()}
       >
         {/* <ImageBackground source={require( '../../assets/images/bg_book_card.png')} style={styles.img_bg_container}> */}
@@ -67,10 +67,9 @@ export default class BookCard extends Component<Props> {
               width: "100%",
               height: "30%",
               flexDirection: "column",
-              paddingTop: 7,
             }}
           >
-            <Text style={[styles.bookTitle, { fontSize: 30 }]}>
+            <Text numberOfLines={2} style={[styles.bookTitle]}>
               {this.state.book.title}
             </Text>
           </View>
@@ -80,7 +79,7 @@ export default class BookCard extends Component<Props> {
               width: "100%",
               height: "20%",
               flexDirection: "row",
-              paddingTop: 7,
+              paddingTop: 10,
             }}
           >
             <Text style={[styles.text, { fontSize: 20, color: "gray" }]}>
@@ -97,7 +96,6 @@ export default class BookCard extends Component<Props> {
               paddingEnd: 10,
             }}
           >
-            <View style={{ width: "65%" }}></View>
             <View
               style={{
                 position: "relative",
@@ -133,6 +131,7 @@ export default class BookCard extends Component<Props> {
 
 const styles = StyleSheet.create({
   listViewItemContainer: {
+    height: Dimensions.get("window").height * 0.25,
     width: "100%",
     flexDirection: "row",
     borderRadius: 20,
@@ -164,6 +163,7 @@ const styles = StyleSheet.create({
   bookTitle: {
     fontWeight: "bold",
     color: colors.book_title,
+    fontSize: 20,
   },
   img_bg_container: {
     flexDirection: "row",

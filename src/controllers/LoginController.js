@@ -10,6 +10,7 @@ export const login = async (username, password) => {
   var formData = new FormData();
   formData.append("username", username);
   formData.append("password", password);
+  console.log("LOGIN FORMDATA", username, password);
   let url =
     QuizzitoConstant.API_URL +
     QuizzitoConstant.PRE_END_POINT +
@@ -19,9 +20,11 @@ export const login = async (username, password) => {
   return fetch(url, header)
     .then((response) => Request.processResponse(response))
     .then((responseData) => {
+      console.log("RESPONSE", responseData);
       return { status: "succes", result: responseData.responseJson };
     })
     .catch((error) => {
+      console.log("RESPONSE ERROR", error);
       return { status: "fail", result: error };
     });
 };

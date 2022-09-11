@@ -24,7 +24,7 @@ import colors from "../res/value/colors";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IconAwesome from "react-native-vector-icons/FontAwesome";
 
-const chooseScreen = (props) => {
+const ChooseScreen = (props) => {
   return (
     <View style={styles.container}>
       {/* Top layout */}
@@ -269,4 +269,4 @@ const styles = StyleSheet.create({
     borderColor: "white",
   },
 });
-export default chooseScreen;
+export default ChooseScreen;

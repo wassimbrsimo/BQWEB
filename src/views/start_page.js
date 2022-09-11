@@ -90,8 +90,8 @@ export default class Test extends Component<Props> {
       btn_h,
       btn_w,
       arrow_left_pos,
-      H1: 60,
-      H2:  40,
+      H1: 40,
+      H2:  width / 20,
       start_btn_font: width / 20,
       spinner: false,
       username: "",
@@ -112,7 +112,7 @@ export default class Test extends Component<Props> {
     //firebase.analytics().logEvent("login_with_btn", {"userName": this.state.username.text});
 
     loginController
-      .login(this.state.username.text, this.state.password.text)
+      .login(this.state.username, this.state.password)
       .then(({ status, result }) => this.loginNavigate(result, status));
     // loginController.getTest();
   };
@@ -505,6 +505,7 @@ const styles = StyleSheet.create({
   header_text_1: {
     textAlign: "center",
     fontStyle: "normal",
+    fontSize: 10,
     color: colors.grey_button_text,
   },
   header_text_2: {

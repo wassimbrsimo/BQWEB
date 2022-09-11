@@ -70,11 +70,11 @@ export default class Test extends Component<Props> {
       place_holder_txt_size,
       is_ar,
       icon_dir,
-      selectedIndex: -1,
+      selectedIndex: 0,
       userProfile: {},
-      f_name: {},
-      l_name: {},
-      phone: {},
+      f_name: "",
+      l_name: "",
+      phone: "",
     };
     this.updateIndex = this.updateIndex.bind(this);
   }
@@ -207,15 +207,14 @@ export default class Test extends Component<Props> {
                 flex: 1,
                 flexDirection: "row",
                 justifyContent: "center",
-                marginBottom: 40,
               }}
             >
-              <ButtonGroup
+              {/* <ButtonGroup
                 onPress={this.updateIndex}
                 selectedIndex={selectedIndex}
                 buttons={buttons}
                 selectedButtonStyle={styles.selected_answer}
-                innerBorderStyle={{ color: "transparent" }}
+                innerBorderStyle={{ color: "red" }}
                 buttonStyle={[
                   styles.gender_btn,
                   {
@@ -230,7 +229,7 @@ export default class Test extends Component<Props> {
                     width: this.state.btn_h + 10,
                   },
                 ]}
-              />
+              /> */}
             </View>
 
             {/* <Text style={{ fontSize: 40, color: colors.text_title_form, textAlign: 'center', flex: 1, width: '80%' }}>
@@ -244,7 +243,6 @@ export default class Test extends Component<Props> {
               style={[
                 styles.input_text_style,
                 {
-                  fontSize: this.state.place_holder_txt_size,
                   height: 60,
                   textAlign: this.state.input_txt_alaign,
                 },
@@ -258,7 +256,6 @@ export default class Test extends Component<Props> {
               style={[
                 styles.input_text_style,
                 {
-                  fontSize: this.state.place_holder_txt_size,
                   height: 60,
                   textAlign: this.state.input_txt_alaign,
                 },
@@ -272,7 +269,6 @@ export default class Test extends Component<Props> {
               style={[
                 styles.input_text_style,
                 {
-                  fontSize: this.state.place_holder_txt_size,
                   height: 60,
                   textAlign: this.state.input_txt_alaign,
                 },
@@ -410,6 +406,5 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     borderColor: colors.border_input,
-    backgroundColor: "white",
   },
 });

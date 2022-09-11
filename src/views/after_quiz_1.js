@@ -190,12 +190,7 @@ export default class Test extends Component<Props> {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
               >
-                <Text
-                  style={[
-                    styles.username_text,
-                    { fontSize: this.state.width / 24 },
-                  ]}
-                >
+                <Text style={[styles.username_text, { fontSize: 24 }]}>
                   {this.state.name}
                 </Text>
               </LinearGradient>
@@ -287,6 +282,7 @@ export default class Test extends Component<Props> {
                   resizeMode: "contain",
                   width: this.state.height / 2.5,
                   height: this.state.width / 1.7,
+                  zIndex: 99,
                 }}
               />
               {/* cloud view */}
@@ -294,19 +290,8 @@ export default class Test extends Component<Props> {
               <Image
                 source={require("../assets/images/cloud.png")}
                 style={{
-                  position: "relative",
-                  bottom: this.state.cloud_bottom,
-                  left: this.state.cloud_left,
-                  transform: [
-                    { rotateY: this.state.rotate_deg },
-                  ] /* change the deg (degree of rotation) between 0deg, 360deg*/,
-                  //small
-                  // width:300,
-                  // height:200,
                   width: this.state.cloud_w,
                   height: this.state.cloud_h,
-                  resizeMode: "contain",
-                  zIndex: 100,
                 }}
               />
               <Text
@@ -337,46 +322,32 @@ export default class Test extends Component<Props> {
                 }}
               >
                 <TouchableOpacity
-                  style={{ width: "180%", height: "100%" }}
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                  }}
                   onPress={() => {
-                    this.logout();
+                    this.navigateStart();
                   }}
                 >
                   {/* sunrise view */}
                   <Image
                     source={require("../assets/images/bg_12.png")}
                     style={{
-                      position: "relative",
-                      top: this.state.sunrise_top,
-                      right: this.state.sunrise_right,
-                      height: this.state.sunrise_h,
-                      width: this.state.sunrise_w,
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      aspectRatio: 2,
+                      width: Dimensions.get("window").width / 1.6,
                       resizeMode: "contain",
                     }}
                   />
-
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "column",
-                      position: "absolute",
-                      bottom: this.state.btn_pos_bottom, //'6%' ,
-                      left: this.state.btn_pos_left, //</TouchableOpacity>'-28%',
-                      width: "90%",
-                    }}
-                  >
-                    <Text
-                      style={[
-                        styles.text_read_other_book,
-                        { fontSize: this.state.btn_txt_size },
-                      ]}
-                    >
-                      {i18n.t("read")}{" "}
-                    </Text>
-                    <Text style={styles.text_read_other_book}>
-                      {i18n.t("another_book")}{" "}
-                    </Text>
-                  </View>
+                  <Text style={styles.text_read_other_book}>
+                    {i18n.t("read")}
+                    {"\n"}
+                    {i18n.t("another_book")}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -457,10 +428,11 @@ const styles = StyleSheet.create({
   },
 
   text_read_other_book: {
-    marginTop: 5,
-    width: "100%",
-
     letterSpacing: 3,
+    position: "absolute",
+    textAlignVertical: "center",
+    right: Dimensions.get("window").width / 4.5,
+    bottom: Dimensions.get("window").width / 12,
     textAlign: "center",
     color: "white",
     textTransform: "uppercase",

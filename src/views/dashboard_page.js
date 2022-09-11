@@ -176,7 +176,10 @@ export default class Test extends Component<Props> {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
-              <Text style={[styles.username_text, { fontSize: 30 }]}>
+              <Text
+                numberOfLines={1}
+                style={[styles.username_text, { fontSize: 30 }]}
+              >
                 {this.state.userProfile.f_name}
               </Text>
             </LinearGradient>
